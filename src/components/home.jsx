@@ -1,6 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Home, Car, TreePine, Waves, Star, ChevronDown, Menu, X, Eye, Maximize, Camera, Zap, Shield, Wifi } from 'lucide-react';
+import { Phone, Mail, MapPin, Home, Car, TreePine, Waves, Star, ChevronDown, Menu, X, Eye, Maximize, Camera, Zap, Shield, Wifi, ShieldCheck } from 'lucide-react';
+import banner2 from '../assets/banner.png'; // Ensure this path is correct
+import dam from '../assets/img_4.png'; // Ensure this path is correct
+import img1 from '../assets/img_1.png';
+import img2 from '../assets/img_2.png';
+import img3 from '../assets/img_3.png';
+import img4 from '../assets/img_4.png';
+import logo from '../assets/logo.png'; // Ensure this path is correct
+import video from '../assets/video.mp4'; // Import video from assets
+import Amenities from './amenities';
+import { motion } from 'framer-motion';
 
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 60 } },
+};
+// import img5 from '../assets/img_5.png';
+// import img6 from '../assets/img_6.png';
 const PawnaLakeVillas = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -8,72 +33,73 @@ const PawnaLakeVillas = () => {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
   const bentoSpecifications = [
-    {
-      icon: <Home className="w-8 h-8" />,
-      label: "Built-up Area",
-      value: "4,200 sq ft",
-      description: "Spacious living across multiple levels",
-      gradient: "from-blue-500 to-cyan-500",
-      size: "large"
-    },
-    {
-      icon: <Maximize className="w-6 h-6" />,
-      label: "Plot Size",
-      value: "2,400 sq ft",
-      description: "Premium land allocation",
-      gradient: "from-purple-500 to-pink-500",
-      size: "medium"
-    },
-    {
-      icon: <Car className="w-6 h-6" />,
-      label: "Parking",
-      value: "2 Cars",
-      description: "Covered parking space",
-      gradient: "from-green-500 to-teal-500",
-      size: "small"
-    },
-    {
-      icon: <TreePine className="w-6 h-6" />,
-      label: "Garden Area",
-      value: "800 sq ft",
-      description: "Private landscaped garden",
-      gradient: "from-emerald-500 to-green-500",
-      size: "small"
-    },
-    {
-      icon: <Waves className="w-6 h-6" />,
-      label: "Swimming Pool",
-      value: "15x8 ft",
-      description: "Private infinity pool",
-      gradient: "from-blue-400 to-blue-600",
-      size: "medium"
-    },
-    {
-      icon: <Zap className="w-6 h-6" />,
-      label: "Power Backup",
-      value: "100% Coverage",
-      description: "Uninterrupted power supply",
-      gradient: "from-yellow-500 to-orange-500",
-      size: "small"
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      label: "Security",
-      value: "24/7 Gated",
-      description: "Multi-tier security system",
-      gradient: "from-red-500 to-pink-500",
-      size: "small"
-    },
-    {
-      icon: <Wifi className="w-6 h-6" />,
-      label: "Smart Home",
-      value: "IoT Enabled",
-      description: "Fully automated systems",
-      gradient: "from-indigo-500 to-purple-500",
-      size: "medium"
-    }
-  ];
+  {
+    icon: <Home className="w-8 h-8" />,
+    label: "Built-up Area",
+    value: "4,200 sq ft",
+    description: "Spacious living across multiple levels",
+    gradient: "from-[#0a4384] to-[#6392bf]",
+    size: "large"
+  },
+  {
+    icon: <Maximize className="w-6 h-6" />,
+    label: "Plot Size",
+    value: "2,400 sq ft",
+    description: "Premium land allocation",
+    gradient: "from-[#00274d] to-[#0a4384]",
+    size: "medium"
+  },
+  {
+    icon: <Car className="w-6 h-6" />,
+    label: "Parking",
+    value: "2 Cars",
+    description: "Covered parking space",
+    gradient: "from-[#6392bf] to-[#b8cce0]",
+    size: "small"
+  },
+  {
+    icon: <TreePine className="w-6 h-6" />,
+    label: "Garden Area",
+    value: "800 sq ft",
+    description: "Private landscaped garden",
+    gradient: "from-[#0a4384] to-[#b8cce0]",
+    size: "small"
+  },
+  {
+    icon: <Waves className="w-6 h-6" />,
+    label: "Swimming Pool",
+    value: "15x8 ft",
+    description: "Private infinity pool",
+    gradient: "from-[#00274d] to-[#6392bf]",
+    size: "small"
+  },
+  {
+    icon: <Zap className="w-6 h-6" />,
+    label: "Power Backup",
+    value: "100% Coverage",
+    description: "Uninterrupted power supply",
+    gradient: "from-[#6392bf] to-[#0a4384]",
+    size: "small"
+  },
+  {
+    icon: <Shield className="w-6 h-6" />,
+    label: "Security",
+    value: "24/7 Gated",
+    description: "Multi-tier security system",
+    gradient: "from-[#00274d] to-[#b8cce0]",
+    size: "small"
+  },
+  {
+    icon: <Wifi className="w-6 h-6" />,
+    label: "Smart Home",
+    value: "IoT Enabled",
+    description: "Fully automated systems",
+    gradient: "from-[#0a4384] to-[#00274d]",
+    size: "small"
+  }
+];
 
+ 
   const getGridClass = (size, index) => {
     switch (size) {
       case 'large':
@@ -85,15 +111,7 @@ const PawnaLakeVillas = () => {
     }
   };
   // Gallery images (using placeholder images with different scenic themes)
-  const galleryImages = [
-    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop&crop=center',
-    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&h=600&fit=crop&crop=center',
-    'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop&crop=center',
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&crop=center',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&crop=center',
-    'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop&crop=center'
-  ];
-
+  const galleryImages = [img1, img2, img3, img4];
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -124,14 +142,18 @@ const PawnaLakeVillas = () => {
     setIsMenuOpen(false);
   };
 
-  const amenities = [
-    { icon: Home, title: "5 BHK Luxury Villa", desc: "Spacious waterfront villas with premium finishes" },
-    { icon: Waves, title: "Private Swimming Pool", desc: "Your personal oasis for relaxation" },
-    { icon: TreePine, title: "Lush Gardens", desc: "Beautifully landscaped private gardens" },
-    { icon: Car, title: "Dedicated Parking", desc: "Secure covered parking for your vehicles" },
-    { icon: MapPin, title: "Prime Location", desc: "Just 500m from the pristine Pawna Dam" },
-    { icon: Star, title: "Exclusive Living", desc: "Only 8 premium villas - ultra-exclusive" }
-  ];
+ const amenities = [
+  { icon: Home, title: "5 BHK Luxury Villa", desc: "Spacious waterfront villas with premium finishes" },
+  { icon: Waves, title: "Private Swimming Pool", desc: "Your personal oasis for relaxation" },
+  { icon: TreePine, title: "Lush Gardens", desc: "Beautifully landscaped private gardens" },
+  { icon: Car, title: "Dedicated Parking", desc: "Secure covered parking for your vehicles" },
+  { icon: MapPin, title: "Prime Location", desc: "Just 500m from the pristine Pawna Dam" },
+  { icon: Star, title: "Exclusive Living", desc: "Only 8 premium villas - ultra-exclusive" },
+  { icon: ShieldCheck, title: "Security Cabin", desc: "On-site 24x7 manned security cabin" },
+  { icon: Camera, title: "24x7 CCTV", desc: "Round-the-clock surveillance for your safety" },
+
+];
+
 
   const specifications = [
     { label: "Villa Type", value: "5 BHK Waterfront" },
@@ -155,44 +177,46 @@ const PawnaLakeVillas = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-lg z-50 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                  Pawna Lake Villas
-                </h1>
-              </div>
-            </div>
-            
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {['Home', 'About', 'Amenities', 'Gallery', 'Specifications', 'Location', 'Contact'].map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-50"
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
-            
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-300"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+      {/* /* Navigation */ }
+        <nav className="fixed top-0 w-full bg-[#ffffff81] backdrop-blur-[28px] shadow-lg z-50 transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <img
+            src={logo}
+            alt="Pawna Lake Villas Logo"
+            className="h-16 w-auto"
+              />
             </div>
           </div>
-        </div>
+          
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {['Home', 'About', 'Amenities', 'Gallery', 'Specifications', 'Location', 'Contact'].map((item) => (
+            <button
+              key={item}
+              onClick={() => scrollToSection(item.toLowerCase())}
+              className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-blue-50"
+            >
+              {item}
+            </button>
+              ))}
+            </div>
+          </div>
+          
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-300"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+            </div>
+          </div>
 
-        {/* Mobile menu */}
+          {/* Mobile menu */}
         <div className={`md:hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden bg-white border-t`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {['Home', 'About', 'Amenities', 'Gallery', 'Specifications', 'Location', 'Contact'].map((item) => (
@@ -209,179 +233,270 @@ const PawnaLakeVillas = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-teal-800/90 z-10"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center transform scale-105 transition-transform duration-[20s] ease-linear animate-pulse"
-          style={{
-            backgroundImage: `url(${galleryImages[currentImageIndex]})`,
-            animationDuration: '20s'
-          }}
-        ></div>
-        
-        <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <div className="transform translate-y-8 opacity-0 animate-[slideUp_1s_ease-out_0.5s_forwards]">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Your Private Paradise
-              <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                at Pawna Lake
-              </span>
-            </h1>
-            
-            <p className="text-xl sm:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Exclusive 5 BHK waterfront villas designed for ultimate luxury. 
-              Only 8 premium villas available in this breathtaking location.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <div className="bg-white/20 backdrop-blur-md rounded-full px-8 py-4 border border-white/30">
-                <span className="text-3xl font-bold text-yellow-400">₹2.75 Cr</span>
-                <span className="text-white ml-2">onwards</span>
-              </div>
-              <div className="bg-red-500/90 backdrop-blur-md rounded-full px-6 py-3 border border-red-400">
-                <span className="text-white font-semibold">Only 8 Villas Left!</span>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-2xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300 hover:from-blue-700 hover:to-teal-700"
-              >
-                Book Site Visit
-              </button>
-              <button 
-                onClick={() => scrollToSection('gallery')}
-                className="bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-full font-semibold text-lg border border-white/30 hover:bg-white/30 transform hover:scale-105 transition-all duration-300"
-              >
-                View Gallery
-              </button>
-            </div>
-          </div>
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+           muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={video} type="video/mp4" />
+            {/* Fallback background image if video doesn't load */}
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${banner2})` }}
+            />
+          </video>
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <ChevronDown
+            className="text-white animate-bounce cursor-pointer"
+            size={32}
+            onClick={() => scrollToSection('footer')}
+          />
         </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <ChevronDown className="text-white animate-bounce cursor-pointer" size={32} onClick={() => scrollToSection('about')} />
         </div>
       </section>
+
 
       {/* About Section */}
-      <section id="about" className={`py-20 bg-white transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              Luxury Redefined at
-              <span className="block bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                Pawna Lake
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Experience unparalleled luxury in our exclusive collection of waterfront villas. 
-              Nestled just 500 meters from the pristine Pawna Dam, these architectural masterpieces 
-              offer the perfect blend of modern sophistication and natural serenity.
-            </p>
-          </div>
+     <section id="about" className={`py-20 bg-gradient-to-r from-blue-50 to-teal-50 transition-all duration-1000 ${isVisible.about ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
+        Luxury Redefined at
+        <span className="block text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(to right, #0a4384, #6392bf)' }}>
+          Pawna Lake
+        </span>
+      </h2>
+      <p className="text-xl text-[#00274d] max-w-3xl mx-auto leading-relaxed">
+        Experience unparalleled luxury in our exclusive collection of waterfront villas. 
+        Nestled just 500 meters from the pristine Pawna Dam, these architectural masterpieces 
+        offer the perfect blend of modern sophistication and natural serenity.
+      </p>
+    </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="bg-gradient-to-r from-blue-50 to-teal-50 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Choose Pawna Lake Villas?</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-3">✓</span>
-                    <span>Ultra-exclusive community with only 8 premium villas</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-3">✓</span>
-                    <span>Direct waterfront access with stunning lake views</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-3">✓</span>
-                    <span>Perfect weekend retreat from Mumbai & Pune</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-blue-600 mr-3">✓</span>
-                    <span>Investment opportunity in premium real estate</span>
-                  </li>
-                </ul>
-              </div>
-              
-              <div className="bg-gradient-to-r from-teal-50 to-blue-50 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Luxury Isn't Just About Living</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  It's about living well. Our villas are designed for those who appreciate the finer things in life - 
-                  from private swimming pools to meticulously landscaped gardens, every detail has been crafted 
-                  to provide an unmatched living experience.
-                </p>
-              </div>
-            </div>
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div className="space-y-6">
+        <div className="bg-[#6392bf] bg-opacity-10 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+          <h3 className="text-2xl font-bold text-[#00274d] mb-4">Why Choose Pawna Lake Villas?</h3>
+          <ul className="space-y-3 text-[#00274d]">
+            <li className="flex items-start">
+              <span className="text-[#0a4384] mr-3">✓</span>
+              <span>Ultra-exclusive community with only 8 premium villas</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-[#0a4384] mr-3">✓</span>
+              <span>Direct waterfront access with stunning lake views</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-[#0a4384] mr-3">✓</span>
+              <span>Perfect weekend retreat from Mumbai & Pune</span>
+            </li>
+            <li className="flex items-start">
+              <span className="text-[#0a4384] mr-3">✓</span>
+              <span>Investment opportunity in premium real estate</span>
+            </li>
+          </ul>
+        </div>
 
-            <div className="relative">
-              <div className="bg-gradient-to-br from-blue-400 to-teal-500 rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop&crop=center"
-                  alt="Luxury Villa"
-                  className="w-full h-80 object-cover rounded-2xl"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-yellow-400 text-gray-900 p-4 rounded-full shadow-xl transform hover:scale-110 transition-all duration-300">
-                <div className="text-center">
-                  <div className="text-2xl font-bold">8</div>
-                  <div className="text-xs">Villas Only</div>
-                </div>
-              </div>
-            </div>
+        <div className="bg-[#6392bf] bg-opacity-10 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+          <h3 className="text-2xl font-bold text-[#00274d] mb-4">Luxury Isn't Just About Living</h3>
+          <p className="text-[#00274d] leading-relaxed">
+            It's about living well. Our villas are designed for those who appreciate the finer things in life – 
+            from private swimming pools to meticulously landscaped gardens, every detail has been crafted 
+            to provide an unmatched living experience.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300" style={{ backgroundImage: 'linear-gradient(to bottom right, #0a4384, #6392bf)' }}>
+          <img 
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop&crop=center"
+            alt="Luxury Villa"
+            className="w-full h-80 object-cover rounded-2xl"
+          />
+        </div>
+        <div className="absolute -bottom-6 -right-6 bg-[#0a4384] text-white p-4 rounded-full shadow-xl transform hover:scale-110 transition-all duration-300">
+          <div className="text-center">
+            <div className="text-2xl font-bold">8</div>
+            <div className="text-xs">Villas Only</div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+  <section id="specifications" className={`pb-10 bg-gradient-to-br from-gray-50 to-teal-50 transition-all duration-1000 ${isVisible.specifications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+      {/* Header Section */}
+     <div className="text-center mb-16">
+  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#0a4384] to-[#6392bf] rounded-2xl mb-6">
+    <Home className="w-8 h-8 text-white" />
+  </div>
+  <h2 className="text-4xl sm:text-6xl font-bold text-[#00274d] mb-6 leading-tight">
+    Villa Specifications &
+    <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent mt-2">
+      Technical Details
+    </span>
+  </h2>
+  <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto leading-relaxed">
+    Meticulously planned spaces with premium specifications for luxurious living experiences
+  </p>
+</div>
 
+
+      {/* Bento Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-fr">
+  {bentoSpecifications.map((spec, index) => (
+    <div 
+      key={index}
+      className={`group relative overflow-hidden rounded-3xl bg-white border border-[#b8cce0] hover:border-[#6392bf] shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:scale-[1.02] ${getGridClass(spec.size, index)}`}
+      style={{ 
+        animationDelay: `${index * 0.1}s`,
+        animation: 'fadeInUp 0.6s ease-out forwards'
+      }}
+    >
+      {/* Gradient Background */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${spec.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+      {/* Content */}
+      <div className={`relative h-full p-6 flex flex-col ${spec.size === 'large' ? 'justify-center items-center text-center' : 'justify-between'}`}>
+        
+        {/* Icon and Label */}
+        <div className={`${spec.size === 'large' ? 'mb-8' : 'mb-4'}`}>
+          <div className={`inline-flex items-center justify-center ${spec.size === 'large' ? 'w-16 h-16 mb-6' : 'w-12 h-12 mb-4'} bg-gradient-to-r ${spec.gradient} rounded-2xl text-white group-hover:scale-110 transition-transform duration-300`}>
+            {spec.icon}
+          </div>
+          <div className={`text-sm font-semibold text-[#00274d] uppercase tracking-wider ${spec.size === 'large' ? 'text-base' : ''}`}>
+            {spec.label}
+          </div>
+        </div>
+
+        {/* Value */}
+       <div className={`${spec.size === 'large' ? 'mb-4' : 'mb-2'}`}>
+  <div className={`font-bold text-[#00274d] group-hover:bg-gradient-to-r group-hover:from-[#0a4384] group-hover:to-[#6392bf] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 ${spec.size === 'large' ? 'text-4xl sm:text-5xl' : 'text-2xl'}`}>
+    {spec.value}
+  </div>
+</div>
+
+
+        {/* Description */}
+        <div className={`text-[#00274d]/70 ${spec.size === 'large' ? 'text-lg' : spec.size === 'medium' ? 'text-base' : 'text-sm'} ${spec.size === 'small' ? 'text-center' : ''}`}>
+          {spec.description}
+        </div>
+
+        {/* Decorative Element */}
+        <div className={`absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br ${spec.gradient} rounded-full opacity-10 group-hover:opacity-20 group-hover:scale-125 transition-all duration-500`} />
+      </div>
+
+      {/* Hover Glow Effect */}
+      <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${spec.gradient} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`} />
+    </div>
+  ))}
+</div>
+
+
+      {/* Additional Info Section */}
+     <div className="mt-16 text-center">
+  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#b8cce0] to-[#6392bf] px-6 py-3 rounded-full border border-[#0a4384]/20">
+    <div className="w-2 h-2 bg-gradient-to-r from-[#0a4384] to-[#6392bf] rounded-full animate-pulse" />
+    <p className="text-sm font-medium text-[#00274d]">
+      All specifications are subject to architectural requirements and approvals
+    </p>
+  </div>
+</div>
+
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </div>
+        <div className="mt-16 bg-white rounded-2xl p-8 shadow-xl max-w-7xl mx-auto">
+  <h3 className="text-2xl font-bold text-[#00274d] mb-6 text-center">Additional Features</h3>
+  <div className="grid md:grid-cols-3 gap-6 text-center">
+    
+    <div className="p-4 bg-[#b8cce0] rounded-xl hover:bg-[#6392bf] transition-colors duration-300">
+      <div className="font-semibold text-[#00274d]">Premium Finishes</div>
+      <div className="text-sm text-[#00274d]/80 mt-1">Italian marble, designer fixtures</div>
+    </div>
+
+    <div className="p-4 bg-[#b8cce0] rounded-xl hover:bg-[#6392bf] transition-colors duration-300">
+      <div className="font-semibold text-[#00274d]">Smart Home Features</div>
+      <div className="text-sm text-[#00274d]/80 mt-1">Automated lighting, security systems</div>
+    </div>
+
+    <div className="p-4 bg-[#b8cce0] rounded-xl hover:bg-[#6392bf] transition-colors duration-300">
+      <div className="font-semibold text-[#00274d]">Energy Efficient</div>
+      <div className="text-sm text-[#00274d]/80 mt-1">Solar panels, rainwater harvesting</div>
+    </div>
+    
+  </div>
+</div>
+
+      </section>
+{/* <Amenities/> */}
       {/* Amenities Section */}
-      <section id="amenities" className={`py-20 bg-gradient-to-br from-gray-50 to-blue-50 transition-all duration-1000 ${isVisible.amenities ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              Premium Amenities &
-              <span className="block bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                Luxury Features
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every villa comes equipped with world-class amenities designed for your comfort and luxury
-            </p>
-          </div>
+     <section id="amenities" className={`py-20 bg-[#b8cce0] transition-all duration-1000 ${isVisible.amenities ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
+        Premium Amenities &
+        <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent">
+          Luxury Features
+        </span>
+      </h2>
+      <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto">
+        Every villa comes equipped with world-class amenities designed for your comfort and luxury
+      </p>
+    </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {amenities.map((amenity, index) => (
-              <div 
-                key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-2 transition-all duration-300 group"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="bg-gradient-to-br from-blue-500 to-teal-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <amenity.icon className="text-white" size={32} />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{amenity.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{amenity.desc}</p>
-              </div>
-            ))}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {amenities.map((amenity, index) => (
+        <div 
+          key={index}
+          className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-2 transition-all duration-300 group"
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
+          <div className="bg-gradient-to-br from-[#0a4384] to-[#6392bf] w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <amenity.icon className="text-white" size={32} />
           </div>
+          <h3 className="text-xl font-bold text-[#00274d] mb-3">{amenity.title}</h3>
+          <p className="text-[#00274d]/70 leading-relaxed">{amenity.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Gallery Section */}
       <section id="gallery" className={`py-20 bg-white transition-all duration-1000 ${isVisible.gallery ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              Visual Journey of
-              <span className="block bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                Luxury Living
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore the breathtaking beauty and luxurious details of your future home
-            </p>
-          </div>
+  <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
+    Visual Journey of
+    <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent">
+      Luxury Living
+    </span>
+  </h2>
+  <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto">
+    Explore the breathtaking beauty and luxurious details of your future home
+  </p>
+</div>
+
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages.map((image, index) => (
@@ -390,11 +505,11 @@ const PawnaLakeVillas = () => {
                 className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
                 onClick={() => { setSelectedImage(index); setShowGalleryModal(true); }}
               >
-                <img 
-                  src={image}
-                  alt={`Villa ${index + 1}`}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+               <img 
+      src={image}
+      alt={`Villa ${index + 1}`}
+      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+    />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 text-white">
                     <Eye size={24} />
@@ -407,15 +522,16 @@ const PawnaLakeVillas = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <button 
-              onClick={() => { setSelectedImage(0); setShowGalleryModal(true); }}
-              className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
-            >
-              <Camera className="inline mr-2" size={20} />
-              View Full Gallery
-            </button>
-          </div>
+         <div className="text-center mt-12">
+  <button 
+    onClick={() => { setSelectedImage(0); setShowGalleryModal(true); }}
+    className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-[#0a4384]/40 transform hover:scale-105 transition-all duration-300"
+  >
+    <Camera className="inline mr-2" size={20} />
+    View Full Gallery
+  </button>
+</div>
+
         </div>
       </section>
 
@@ -450,175 +566,74 @@ const PawnaLakeVillas = () => {
       )}
 
       {/* Specifications Section */}
-      <section id="specifications" className={`py-20 bg-gradient-to-br from-gray-50 to-teal-50 transition-all duration-1000 ${isVisible.specifications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      {/* Header Section */}
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-2xl mb-6">
-          <Home className="w-8 h-8 text-white" />
-        </div>
-        <h2 className="text-4xl sm:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-          Villa Specifications &
-          <span className="block bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent mt-2">
-            Technical Details
-          </span>
-        </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Meticulously planned spaces with premium specifications for luxurious living experiences
-        </p>
-      </div>
+    
 
-      {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-fr">
-        {bentoSpecifications.map((spec, index) => (
+     {/* Location Advantages */}
+<section id="location" className={`py-20 bg-white transition-all duration-1000 ${isVisible.location ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Heading */}
+    <div className="text-center mb-16">
+      <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
+        Prime Location
+        <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent">
+          Advantages
+        </span>
+      </h2>
+      <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto">
+        Strategically located for the perfect balance of tranquility and accessibility
+      </p>
+    </div>
+
+    {/* Advantages Grid */}
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="space-y-6">
+        {locationAdvantages.map((advantage, index) => (
           <div 
             key={index}
-            className={`group relative overflow-hidden rounded-3xl bg-white border border-gray-100 hover:border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:scale-[1.02] ${getGridClass(spec.size, index)}`}
-            style={{ 
-              animationDelay: `${index * 0.1}s`,
-              animation: 'fadeInUp 0.6s ease-out forwards'
-            }}
+            className="flex items-start p-4 bg-gradient-to-r from-[#b8cce0] to-[#6392bf] rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {/* Gradient Background */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${spec.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-            
-            {/* Content */}
-            <div className={`relative h-full p-6 flex flex-col ${spec.size === 'large' ? 'justify-center items-center text-center' : 'justify-between'}`}>
-              {/* Icon and Label */}
-              <div className={`${spec.size === 'large' ? 'mb-8' : 'mb-4'}`}>
-                <div className={`inline-flex items-center justify-center ${spec.size === 'large' ? 'w-16 h-16 mb-6' : 'w-12 h-12 mb-4'} bg-gradient-to-r ${spec.gradient} rounded-2xl text-white group-hover:scale-110 transition-transform duration-300`}>
-                  {spec.icon}
-                </div>
-                <div className={`text-sm font-semibold text-gray-500 uppercase tracking-wider ${spec.size === 'large' ? 'text-base' : ''}`}>
-                  {spec.label}
-                </div>
-              </div>
-
-              {/* Value */}
-              <div className={`${spec.size === 'large' ? 'mb-4' : 'mb-2'}`}>
-                <div className={`font-bold text-gray-900 group-hover:bg-gradient-to-r group-hover:${spec.gradient} group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 ${spec.size === 'large' ? 'text-4xl sm:text-5xl' : 'text-2xl'}`}>
-                  {spec.value}
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className={`text-gray-600 ${spec.size === 'large' ? 'text-lg' : spec.size === 'medium' ? 'text-base' : 'text-sm'} ${spec.size === 'small' ? 'text-center' : ''}`}>
-                {spec.description}
-              </div>
-
-              {/* Decorative Element */}
-              <div className={`absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br ${spec.gradient} rounded-full opacity-10 group-hover:opacity-20 group-hover:scale-125 transition-all duration-500`} />
+            <div className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0">
+              {index + 1}
             </div>
-
-            {/* Hover Glow Effect */}
-            <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${spec.gradient} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`} />
+            <p className="text-[#00274d] font-medium">{advantage}</p>
           </div>
         ))}
       </div>
 
-      {/* Additional Info Section */}
-      <div className="mt-16 text-center">
-        <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-50 to-teal-50 px-6 py-3 rounded-full border border-blue-100">
-          <div className="w-2 h-2 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full animate-pulse" />
-          <p className="text-sm font-medium text-gray-700">
-            All specifications are subject to architectural requirements and approvals
-          </p>
+      {/* Image Block */}
+      <div className="relative">
+        <div className="bg-gradient-to-br from-[#0a4384] to-[#6392bf] rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300">
+          <img 
+            src={dam}
+            alt="Pawna Lake Location"
+            className="w-full h-80 object-cover rounded-2xl"
+          />
+        </div>
+        <div className="absolute -top-4 -left-4 bg-white p-4 rounded-xl shadow-xl transform hover:scale-110 transition-all duration-300">
+          <div className="text-center">
+            <div className="text-sm font-medium text-[#00274d]/80">Distance to Dam</div>
+            <div className="text-2xl font-bold text-[#0a4384]">500m</div>
+          </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
-         <div className="mt-16 bg-white rounded-2xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Additional Features</h3>
-            <div className="grid md:grid-cols-3 gap-6 text-center">
-              <div className="p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors duration-300">
-                <div className="font-semibold text-gray-800">Premium Finishes</div>
-                <div className="text-sm text-gray-600 mt-1">Italian marble, designer fixtures</div>
-              </div>
-              <div className="p-4 bg-teal-50 rounded-xl hover:bg-teal-100 transition-colors duration-300">
-                <div className="font-semibold text-gray-800">Smart Home Features</div>
-                <div className="text-sm text-gray-600 mt-1">Automated lighting, security systems</div>
-              </div>
-              <div className="p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-colors duration-300">
-                <div className="font-semibold text-gray-800">Energy Efficient</div>
-                <div className="text-sm text-gray-600 mt-1">Solar panels, rainwater harvesting</div>
-              </div>
-            </div>
-          </div>
-      </section>
 
-      {/* Location Advantages */}
-      <section id="location" className={`py-20 bg-white transition-all duration-1000 ${isVisible.location ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-              Prime Location
-              <span className="block bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">
-                Advantages
-              </span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Strategically located for the perfect balance of tranquility and accessibility
-            </p>
-          </div>
+    {/* CTA Button */}
+    <div className="mt-16 text-center">
+      <a 
+        href="https://maps.app.goo.gl/XYP2ZAH4rdxQ47WP7"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-[#0a4384]/25 transform hover:scale-105 transition-all duration-300"
+      >
+        <MapPin className="mr-2" size={20} />
+        View on Google Maps
+      </a>
+    </div>
+  </div>
+</section>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              {locationAdvantages.map((advantage, index) => (
-                <div 
-                  key={index}
-                  className="flex items-start p-4 bg-gradient-to-r from-blue-50 to-teal-50 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0">
-                    {index + 1}
-                  </div>
-                  <p className="text-gray-700 font-medium">{advantage}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="relative">
-              <div className="bg-gradient-to-br from-blue-400 to-teal-500 rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop&crop=center"
-                  alt="Pawna Lake Location"
-                  className="w-full h-80 object-cover rounded-2xl"
-                />
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-xl transform hover:scale-110 transition-all duration-300">
-                <div className="text-center">
-                  <div className="text-sm font-medium text-gray-600">Distance to Dam</div>
-                  <div className="text-2xl font-bold text-blue-600">500m</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 text-center">
-            <a 
-              href="https://maps.app.goo.gl/Zon92PNN4EpR4zvR8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
-            >
-              <MapPin className="mr-2" size={20} />
-              View on Google Maps
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className={`py-20 bg-gradient-to-br from-gray-900 to-blue-900 text-white transition-all duration-1000 ${isVisible.contact ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -670,7 +685,7 @@ const PawnaLakeVillas = () => {
 
         {/* Location */}
         <a
-          href="https://maps.app.goo.gl/Zon92PNN4EpR4zvR8"
+          href="https://maps.app.goo.gl/XYP2ZAH4rdxQ47WP7"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center text-lg hover:text-yellow-400 transition-colors duration-300"
@@ -732,10 +747,10 @@ const PawnaLakeVillas = () => {
 
       {/* Preferred Time */}
       <select className="w-full p-4 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-        <option value="">Preferred Visit Time</option>
-        <option value="morning">Morning (9 AM - 12 PM)</option>
-        <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-        <option value="evening">Evening (4 PM - 7 PM)</option>
+        <option className="text-black" value="">Preferred Visit Time</option>
+        <option className="text-black" value="morning">Morning (9 AM - 12 PM)</option>
+        <option className="text-black" value="afternoon">Afternoon (12 PM - 4 PM)</option>
+        <option className="text-black" value="evening">Evening (4 PM - 7 PM)</option>
       </select>
 
       {/* Notes */}
@@ -764,85 +779,115 @@ const PawnaLakeVillas = () => {
                 "Because luxury isn't just about living—it's about living well."
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href="tel:8378966777"
-                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-green-500/25 transform hover:scale-105 transition-all duration-300"
-                >
-                  Call Now - 83 789 66 777
-                </a>
-                <button 
-                  onClick={() => window.open('https://wa.me/918378966777?text=Hi, I am interested in Pawna Lake Villas. Please share more details.', '_blank')}
-                  className="bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-green-500/25 transform hover:scale-105 transition-all duration-300"
-                >
-                  WhatsApp Inquiry
-                </button>
-              </div>
+  {/* Call Now Button */}
+  <a 
+    href="tel:8378966777"
+    className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-[#0a4384]/30 transform hover:scale-105 transition-all duration-300"
+  >
+    Call Now - 83 789 66 777
+  </a>
+
+  {/* WhatsApp Inquiry Button */}
+  <button 
+    onClick={() => window.open('https://wa.me/918378966777?text=Hi, I am interested in Pawna Lake Villas. Please share more details.', '_blank')}
+    className="bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-green-500/25 transform hover:scale-105 transition-all duration-300"
+  >
+    WhatsApp Inquiry
+  </button>
+</div>
+
             </div>
           </div>
         </div>
+       {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <ChevronDown
+            className="text-white animate-bounce cursor-pointer"
+            size={32}
+            onClick={() => scrollToSection('footer')}
+          />
+        </div> */}
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent mb-4">
-                Pawna Lake Villas
-              </h3>
-              <p className="text-gray-400 leading-relaxed">
-                Your private paradise at Pawna Lake. Exclusive luxury waterfront villas 
-                designed for those who appreciate the finest things in life.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <div className="space-y-2">
-                {['About', 'Amenities', 'Gallery', 'Specifications', 'Location', 'Contact'].map((link) => (
-                  <button
-                    key={link}
-                    onClick={() => scrollToSection(link.toLowerCase())}
-                    className="block text-gray-400 hover:text-white transition-colors duration-300"
-                  >
-                    {link}
-                  </button>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
-              <div className="space-y-3 text-gray-400">
-                <div>📞 83 789 66 777</div>
-                <div>📧 info@pawnalakevillas.com</div>
-                <div>📍 Pawna Lake, Lonavala, Maharashtra</div>
-                <div>💰 Starting from ₹2.75 Cr</div>
-              </div>
+     {/* Footer  */}
+        <footer id='footer' className="bg-gray-900 text-white py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-3 gap-8">
+          <div>
+            <img
+              src={logo}
+              alt="Pawna Lake Villas Logo"
+              className="h-24 w-auto mb-4"
+            />
+           
+            <p className="text-gray-400 leading-relaxed">
+              Your private paradise at Pawna Lake. Exclusive luxury waterfront villas 
+              designed for those who appreciate the finest things in life.
+            </p>
+          </div>
+          
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <div className="space-y-2">
+              <a
+          href="/Home"
+          className="block text-gray-400 hover:text-white transition-colors duration-300"
+              >
+          Home
+              </a>
+              {['About', 'Amenities', 'Gallery', 'Specifications', 'Location', 'Contact'].map((link) => (
+          <button
+            key={link}
+            onClick={() => scrollToSection(link.toLowerCase())}
+            className="block text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            {link}
+          </button>
+              ))}
             </div>
           </div>
           
-          <div className="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400">
-            <p>&copy; 2025 Pawna Lake Villas. All rights reserved. | RERA Registration Applied</p>
-            <div className="mt-4 flex justify-center space-x-6">
-              <span className="text-sm">🏆 Premium Real Estate</span>
-              <span className="text-sm">🌟 Luxury Living</span>
-              <span className="text-sm">🔒 Secure Investment</span>
+             <div>
+        <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
+        <div className="space-y-3 text-gray-400">
+          <a href="tel:8378966777" className="block cursor-pointer">📞 83 789 66 777</a>
+          <a href="mailto:info@pawnalakevillas.com" className="block cursor-pointer">📧 info@pawnalakevillas.com</a>
+          <a 
+        href="https://maps.app.goo.gl/Zon92PNN4EpR4zvR8" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="block cursor-pointer"
+          >
+        📍 Pawna Lake, Lonavala, Maharashtra
+          </a>
+          <a href="tel:8378966777" className="block cursor-pointer">💰 Starting from ₹2.75 Cr</a>
+        </div>
+            </div>
+
+            </div>
+            
+            <div className="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400">
+          <p>&copy; 2025 Pawna Lake Villas. All rights reserved. | RERA Registration Applied</p>
+          <div className="mt-4 flex justify-center space-x-6">
+            <span className="text-sm">🏆 Premium Real Estate</span>
+            <span className="text-sm">🌟 Luxury Living</span>
+            <span className="text-sm">🔒 Secure Investment</span>
+          </div>
             </div>
           </div>
-        </div>
-      </footer>
+          
+        </footer>
 
-      {/* Floating Call Button */}
-    <div className="fixed bottom-6 right-6 z-50">
+        {/* Floating Call Button */}
+   <div className="fixed bottom-6 right-6 z-50">
   <a
     href="tel:8378966777"
-    className="flex items-center justify-center bg-gradient-to-r from-green-500 to-blue-500 text-white w-14 h-14 rounded-full shadow-lg hover:shadow-green-500/40 transform hover:scale-110 transition duration-300 animate-pulse"
+    className="flex items-center justify-center bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white w-14 h-14 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300 animate-pulse"
     aria-label="Call Now"
   >
     <Phone size={24} />
   </a>
 </div>
+
 
       {/* Floating WhatsApp Button */}
       <div className="fixed bottom-6 left-6 z-40">
