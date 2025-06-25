@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Home, Car, TreePine, Waves, Star, ChevronDown, Menu, X, Eye, Maximize, Camera, Zap, Shield, Wifi, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, MapPin, Home, Car, TreePine, Waves, Star, ChevronDown, Menu, X, Eye, Maximize, Camera, Zap, Shield, Wifi, ShieldCheck, Square, Trees, Smartphone } from 'lucide-react';
 import banner2 from '../assets/banner.png'; // Ensure this path is correct
 import dam from '../assets/img_4.png'; // Ensure this path is correct
 import img1 from '../assets/img_1.png';
@@ -8,7 +8,11 @@ import img3 from '../assets/img_3.png';
 import img4 from '../assets/img_4.png';
 import logo from '../assets/logo.png'; // Ensure this path is correct
 import video from '../assets/video.mp4'; // Import video from assets
+import video2 from '../assets/video2.mp4'; // Import video from assets
+import video1 from '../assets/video1.mp4'; // Import video from assets
 import Amenities from './amenities';
+import tests from '../assets/frame.png'; // Ensure this path is correct
+import tests2 from '../assets/frame.png'; // Ensure this path is correct
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -32,84 +36,71 @@ const PawnaLakeVillas = () => {
   const [isVisible, setIsVisible] = useState({});
   const [showGalleryModal, setShowGalleryModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
-  const bentoSpecifications = [
+const [selectedSpec, setSelectedSpec] = useState(0);
+
+  useEffect(() => {
+    setIsVisible(true);
+    const interval = setInterval(() => {
+      setSelectedSpec(prev => (prev + 1) % specifications1.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+const specifications1 = [
   {
-    icon: <Home className="w-8 h-8" />,
-    label: "Built-up Area",
-    value: "4,200 sq ft",
-    description: "Spacious living across multiple levels",
-    gradient: "from-[#0a4384] to-[#6392bf]",
-    size: "large"
+    id: 0,
+    icon: Home,
+    title: "Area & Plot",
+    value: "4,200 / 2,400",
+    unit: "Built-up / Plot (sq ft)",
+    description: "Spacious living across 4,200 sq ft on a 2,400 sq ft premium plot",
+    accent: "#FF6B6B",
+    pattern: "dots"
   },
   {
-    icon: <Maximize className="w-6 h-6" />,
-    label: "Plot Size",
-    value: "2,400 sq ft",
-    description: "Premium land allocation",
-    gradient: "from-[#00274d] to-[#0a4384]",
-    size: "medium"
+    id: 1,
+    icon: Car,
+    title: "Parking & Backup",
+    value: "2 Cars / 100%",
+    unit: "Power Coverage",
+    description: "Covered parking for 2 cars and 100% power backup for convenience",
+    accent: "#45B7D1",
+    pattern: "grid"
   },
   {
-    icon: <Car className="w-6 h-6" />,
-    label: "Parking",
-    value: "2 Cars",
-    description: "Covered parking space",
-    gradient: "from-[#6392bf] to-[#b8cce0]",
-    size: "small"
+    id: 2,
+    icon: Trees,
+    title: "Garden & Pool",
+    value: "800 / 15x8",
+    unit: "sq ft / ft",
+    description: "800 sq ft garden with a personal 15x8 ft infinity pool",
+    accent: "#96CEB4",
+    pattern: "organic"
   },
   {
-    icon: <TreePine className="w-6 h-6" />,
-    label: "Garden Area",
-    value: "800 sq ft",
-    description: "Private landscaped garden",
-    gradient: "from-[#0a4384] to-[#b8cce0]",
-    size: "small"
+    id: 3,
+    icon: Shield,
+    title: "Security & Smart Home",
+    value: "24/7 / IoT",
+    unit: "Gated / Enabled",
+    description: "Round-the-clock gated security and smart home automation features",
+    accent: "#54A0FF",
+    pattern: "hexagon"
   },
   {
-    icon: <Waves className="w-6 h-6" />,
-    label: "Swimming Pool",
-    value: "15x8 ft",
-    description: "Private infinity pool",
-    gradient: "from-[#00274d] to-[#6392bf]",
-    size: "small"
-  },
-  {
-    icon: <Zap className="w-6 h-6" />,
-    label: "Power Backup",
-    value: "100% Coverage",
-    description: "Uninterrupted power supply",
-    gradient: "from-[#6392bf] to-[#0a4384]",
-    size: "small"
-  },
-  {
-    icon: <Shield className="w-6 h-6" />,
-    label: "Security",
-    value: "24/7 Gated",
-    description: "Multi-tier security system",
-    gradient: "from-[#00274d] to-[#b8cce0]",
-    size: "small"
-  },
-  {
-    icon: <Wifi className="w-6 h-6" />,
-    label: "Smart Home",
-    value: "IoT Enabled",
-    description: "Fully automated systems",
-    gradient: "from-[#0a4384] to-[#00274d]",
-    size: "small"
+    id: 4,
+    icon: Square,
+    title: "Design & Comfort",
+    value: "Luxury / Tech",
+    unit: "Integrated",
+    description: "Modern villa with elegant design and integrated smart climate control",
+    accent: "#5F27CD",
+    pattern: "circuit"
   }
 ];
 
- 
-  const getGridClass = (size, index) => {
-    switch (size) {
-      case 'large':
-        return 'md:col-span-2 md:row-span-2';
-      case 'medium':
-        return 'md:col-span-1 md:row-span-2';
-      default:
-        return 'md:col-span-1 md:row-span-1';
-    }
-  };
+
+  const currentSpec = specifications1[selectedSpec];
   // Gallery images (using placeholder images with different scenic themes)
   const galleryImages = [img1, img2, img3, img4];
   useEffect(() => {
@@ -233,8 +224,8 @@ const PawnaLakeVillas = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Video */}
+      <section id="home" className="hidden md:flex relative h-screen items-center justify-center overflow-hidden">
+ {/* Background Video */}
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -244,6 +235,32 @@ const PawnaLakeVillas = () => {
             className="w-full h-full object-cover"
           >
             <source src={video} type="video/mp4" />
+            {/* Fallback background image if video doesn't load */}
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${banner2})` }}
+            />
+          </video>
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+          <ChevronDown
+            className="text-white animate-bounce cursor-pointer"
+            size={32}
+            onClick={() => scrollToSection('footer')}
+          />
+        </div>
+        </div>
+      </section>
+     <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden lg:hidden">
+ {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+           muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={video1} type="video/mp4" />
             {/* Fallback background image if video doesn't load */}
             <div 
               className="w-full h-full bg-cover bg-center"
@@ -278,180 +295,99 @@ const PawnaLakeVillas = () => {
       </p>
     </div>
 
-    <div className="grid md:grid-cols-2 gap-12 items-center">
-      <div className="space-y-6">
-        <div className="bg-[#6392bf] bg-opacity-10 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-          <h3 className="text-2xl font-bold text-[#00274d] mb-4">Why Choose Pawna Lake Villas?</h3>
-          <ul className="space-y-3 text-[#00274d]">
-            <li className="flex items-start">
-              <span className="text-[#0a4384] mr-3">✓</span>
-              <span>Ultra-exclusive community with only 8 premium villas</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[#0a4384] mr-3">✓</span>
-              <span>Direct waterfront access with stunning lake views</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[#0a4384] mr-3">✓</span>
-              <span>Perfect weekend retreat from Mumbai & Pune</span>
-            </li>
-            <li className="flex items-start">
-              <span className="text-[#0a4384] mr-3">✓</span>
-              <span>Investment opportunity in premium real estate</span>
-            </li>
-          </ul>
-        </div>
+   <div className="grid md:grid-cols-2 gap-12 items-center">
+  {/* LEFT: Text Content */}
+  <motion.div
+    className="space-y-6"
+    initial={{ opacity: 0, x: -100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    <div className="bg-[#6392bf] bg-opacity-10 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+      <h3 className="text-2xl font-bold text-[#00274d] mb-4">Why Choose Pawna Lake Villas?</h3>
+      <ul className="space-y-3 text-[#00274d]">
+        <li className="flex items-start">
+          <span className="text-[#0a4384] mr-3">✓</span>
+          <span>Ultra-exclusive community with only 8 premium villas</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-[#0a4384] mr-3">✓</span>
+          <span>Direct waterfront access with stunning lake views</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-[#0a4384] mr-3">✓</span>
+          <span>Perfect weekend retreat from Mumbai & Pune</span>
+        </li>
+        <li className="flex items-start">
+          <span className="text-[#0a4384] mr-3">✓</span>
+          <span>Investment opportunity in premium real estate</span>
+        </li>
+      </ul>
+    </div>
 
-        <div className="bg-[#6392bf] bg-opacity-10 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-          <h3 className="text-2xl font-bold text-[#00274d] mb-4">Luxury Isn't Just About Living</h3>
-          <p className="text-[#00274d] leading-relaxed">
-            It's about living well. Our villas are designed for those who appreciate the finer things in life – 
-            from private swimming pools to meticulously landscaped gardens, every detail has been crafted 
-            to provide an unmatched living experience.
-          </p>
-        </div>
-      </div>
+    <div className="bg-[#6392bf] bg-opacity-10 p-8 rounded-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+      <h3 className="text-2xl font-bold text-[#00274d] mb-4">Luxury Isn't Just About Living</h3>
+      <p className="text-[#00274d] leading-relaxed">
+        It's about living well. Our villas are designed for those who appreciate the finer things in life – 
+        from private swimming pools to meticulously landscaped gardens, every detail has been crafted 
+        to provide an unmatched living experience.
+      </p>
+    </div>
+  </motion.div>
 
-      <div className="relative">
-        <div className="rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300" style={{ backgroundImage: 'linear-gradient(to bottom right, #0a4384, #6392bf)' }}>
-          <img 
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop&crop=center"
-            alt="Luxury Villa"
-            className="w-full h-80 object-cover rounded-2xl"
-          />
-        </div>
-        <div className="absolute -bottom-6 -right-6 bg-[#0a4384] text-white p-4 rounded-full shadow-xl transform hover:scale-110 transition-all duration-300">
-          <div className="text-center">
-            <div className="text-2xl font-bold">8</div>
-            <div className="text-xs">Villas Only</div>
-          </div>
-        </div>
+  {/* RIGHT: Image */}
+  <motion.div
+    className="relative"
+    initial={{ opacity: 0, x: 100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    <div
+      className="rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300"
+      style={{ backgroundImage: 'linear-gradient(to bottom right, #0a4384, #6392bf)' }}
+    >
+      <img
+        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop&crop=center"
+        alt="Luxury Villa"
+        className="w-full h-80 object-cover rounded-2xl"
+      />
+    </div>
+    <div className="absolute -bottom-6 -right-6 bg-[#0a4384] text-white p-4 rounded-full shadow-xl transform hover:scale-110 transition-all duration-300">
+      <div className="text-center">
+        <div className="text-2xl font-bold">8</div>
+        <div className="text-xs">Villas Only</div>
       </div>
     </div>
+  </motion.div>
+</div>
+
   </div>
 </section>
-  <section id="specifications" className={`pb-10 bg-gradient-to-br from-gray-50 to-teal-50 transition-all duration-1000 ${isVisible.specifications ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-      {/* Header Section */}
-     <div className="text-center mb-16">
-  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[#0a4384] to-[#6392bf] rounded-2xl mb-6">
-    <Home className="w-8 h-8 text-white" />
-  </div>
-  <h2 className="text-4xl sm:text-6xl font-bold text-[#00274d] mb-6 leading-tight">
-    Villa Specifications &
-    <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent mt-2">
-      Technical Details
-    </span>
-  </h2>
-  <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto leading-relaxed">
-    Meticulously planned spaces with premium specifications for luxurious living experiences
-  </p>
-</div>
-
-
-      {/* Bento Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-fr">
-  {bentoSpecifications.map((spec, index) => (
-    <div 
-      key={index}
-      className={`group relative overflow-hidden rounded-3xl bg-white border border-[#b8cce0] hover:border-[#6392bf] shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:scale-[1.02] ${getGridClass(spec.size, index)}`}
-      style={{ 
-        animationDelay: `${index * 0.1}s`,
-        animation: 'fadeInUp 0.6s ease-out forwards'
-      }}
-    >
-      {/* Gradient Background */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${spec.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-
-      {/* Content */}
-      <div className={`relative h-full p-6 flex flex-col ${spec.size === 'large' ? 'justify-center items-center text-center' : 'justify-between'}`}>
-        
-        {/* Icon and Label */}
-        <div className={`${spec.size === 'large' ? 'mb-8' : 'mb-4'}`}>
-          <div className={`inline-flex items-center justify-center ${spec.size === 'large' ? 'w-16 h-16 mb-6' : 'w-12 h-12 mb-4'} bg-gradient-to-r ${spec.gradient} rounded-2xl text-white group-hover:scale-110 transition-transform duration-300`}>
-            {spec.icon}
-          </div>
-          <div className={`text-sm font-semibold text-[#00274d] uppercase tracking-wider ${spec.size === 'large' ? 'text-base' : ''}`}>
-            {spec.label}
-          </div>
-        </div>
-
-        {/* Value */}
-       <div className={`${spec.size === 'large' ? 'mb-4' : 'mb-2'}`}>
-  <div className={`font-bold text-[#00274d] group-hover:bg-gradient-to-r group-hover:from-[#0a4384] group-hover:to-[#6392bf] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300 ${spec.size === 'large' ? 'text-4xl sm:text-5xl' : 'text-2xl'}`}>
-    {spec.value}
-  </div>
-</div>
-
-
-        {/* Description */}
-        <div className={`text-[#00274d]/70 ${spec.size === 'large' ? 'text-lg' : spec.size === 'medium' ? 'text-base' : 'text-sm'} ${spec.size === 'small' ? 'text-center' : ''}`}>
-          {spec.description}
-        </div>
-
-        {/* Decorative Element */}
-        <div className={`absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br ${spec.gradient} rounded-full opacity-10 group-hover:opacity-20 group-hover:scale-125 transition-all duration-500`} />
-      </div>
-
-      {/* Hover Glow Effect */}
-      <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${spec.gradient} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`} />
-    </div>
-  ))}
-</div>
-
-
-      {/* Additional Info Section */}
-     <div className="mt-16 text-center">
-  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#b8cce0] to-[#6392bf] px-6 py-3 rounded-full border border-[#0a4384]/20">
-    <div className="w-2 h-2 bg-gradient-to-r from-[#0a4384] to-[#6392bf] rounded-full animate-pulse" />
-    <p className="text-sm font-medium text-[#00274d]">
-      All specifications are subject to architectural requirements and approvals
-    </p>
-  </div>
-</div>
-
-
-      <style jsx>{`
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-    </div>
-        <div className="mt-16 bg-white rounded-2xl p-8 shadow-xl max-w-7xl mx-auto">
-  <h3 className="text-2xl font-bold text-[#00274d] mb-6 text-center">Additional Features</h3>
-  <div className="grid md:grid-cols-3 gap-6 text-center">
-    
-    <div className="p-4 bg-[#b8cce0] rounded-xl hover:bg-[#6392bf] transition-colors duration-300">
-      <div className="font-semibold text-[#00274d]">Premium Finishes</div>
-      <div className="text-sm text-[#00274d]/80 mt-1">Italian marble, designer fixtures</div>
-    </div>
-
-    <div className="p-4 bg-[#b8cce0] rounded-xl hover:bg-[#6392bf] transition-colors duration-300">
-      <div className="font-semibold text-[#00274d]">Smart Home Features</div>
-      <div className="text-sm text-[#00274d]/80 mt-1">Automated lighting, security systems</div>
-    </div>
-
-    <div className="p-4 bg-[#b8cce0] rounded-xl hover:bg-[#6392bf] transition-colors duration-300">
-      <div className="font-semibold text-[#00274d]">Energy Efficient</div>
-      <div className="text-sm text-[#00274d]/80 mt-1">Solar panels, rainwater harvesting</div>
-    </div>
-    
-  </div>
-</div>
-
-      </section>
+ 
 {/* <Amenities/> */}
       {/* Amenities Section */}
-     <section id="amenities" className={`py-20 bg-[#b8cce0] transition-all duration-1000 ${isVisible.amenities ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="text-center mb-16">
+     <section id="amenities" className={`py-20  transition-all duration-1000 ${isVisible.amenities ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+  <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+           muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={video2} type="video/mp4" />
+            {/* Fallback background image if video doesn't load */}
+            <div 
+              className="w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${banner2})` }}
+            />
+          </video>
+          
+        </div>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+    <div className="text-center mb-16 z-30 ">
       <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
         Premium Amenities &
         <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent">
@@ -463,11 +399,11 @@ const PawnaLakeVillas = () => {
       </p>
     </div>
 
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       {amenities.map((amenity, index) => (
         <div 
           key={index}
-          className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-2 transition-all duration-300 group"
+          className="bg-[#ffffff81] backdrop-blur-[28px] p-8 rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 hover:-translate-y-2 transition-all duration-300 group"
           style={{ animationDelay: `${index * 0.1}s` }}
         >
           <div className="bg-gradient-to-br from-[#0a4384] to-[#6392bf] w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -483,12 +419,17 @@ const PawnaLakeVillas = () => {
 
 
       {/* Gallery Section */}
-      <section id="gallery" className={`py-20 bg-white transition-all duration-1000 ${isVisible.gallery ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+     <section
+  className="hidden md:block relative px-4 py-10 bg-cover bg-center bg-no-repeat bg-fixed"
+  style={{ backgroundImage: `url('${tests}')` }}
+>
+
+   <section id="gallery" className={` py-10 transition-all duration-1000 ${isVisible.gallery ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
   <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
     Visual Journey of
-    <span className="block bg-gradient-to-r from-[#0a4384] to-[#6392bf] bg-clip-text text-transparent">
+    <span className="block text-[#6392bf] my-4 ">
       Luxury Living
     </span>
   </h2>
@@ -498,7 +439,7 @@ const PawnaLakeVillas = () => {
 </div>
 
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {galleryImages.map((image, index) => (
               <div 
                 key={index}
@@ -534,6 +475,65 @@ const PawnaLakeVillas = () => {
 
         </div>
       </section>
+</section>
+       <section
+  className="relative px-4 py-10 bg-cover bg-center bg-no-repeat bg-fixed lg:hidden"
+  style={{ backgroundImage: `url('${tests2}')` }}
+>
+
+   <section id="gallery" className={` py-10 transition-all duration-1000 ${isVisible.gallery ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+  <h2 className="text-4xl sm:text-5xl font-bold text-[#00274d] mb-6">
+    Visual Journey of
+    <span className="block text-[#6392bf] my-4 ">
+      Luxury Living
+    </span>
+  </h2>
+  <p className="text-xl text-[#00274d]/80 max-w-3xl mx-auto">
+    Explore the breathtaking beauty and luxurious details of your future home
+  </p>
+</div>
+
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {galleryImages.map((image, index) => (
+              <div 
+                key={index}
+                className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                onClick={() => { setSelectedImage(index); setShowGalleryModal(true); }}
+              >
+               <img 
+      src={image}
+      alt={`Villa ${index + 1}`}
+      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+    />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <Eye size={24} />
+                  </div>
+                  <div className="absolute bottom-4 right-4 text-white">
+                    <Maximize size={20} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+         <div className="text-center mt-12">
+  <button 
+    onClick={() => { setSelectedImage(0); setShowGalleryModal(true); }}
+    className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-[#0a4384]/40 transform hover:scale-105 transition-all duration-300"
+  >
+    <Camera className="inline mr-2" size={20} />
+    View Full Gallery
+  </button>
+</div>
+
+        </div>
+      </section>
+</section>
+     
 
       {/* Gallery Modal */}
       {showGalleryModal && (
@@ -566,10 +566,193 @@ const PawnaLakeVillas = () => {
       )}
 
       {/* Specifications Section */}
-    
+    <section className="py-20 bg-gray-900 text-white relative overflow-hidden flex items-center">
+      {/* Animated Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black"></div>
+        {specifications1.map((spec, index) => (
+          <div
+            key={spec.id}
+            className={`absolute w-full h-full transition-opacity duration-1000 ${
+              selectedSpec === index ? 'opacity-20' : 'opacity-0'
+            }`}
+          >
+            <div 
+              className="absolute top-0 right-0 w-1/2 h-full"
+              style={{
+                background: `radial-gradient(ellipse at center, ${spec.accent}15 0%, transparent 70%)`
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Side - Main Feature */}
+          <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
+            <div className="mb-8">
+              <span className="text-sm font-medium tracking-widest text-gray-400 uppercase">
+                Premium Villa Features
+              </span>
+              <h1 className="text-6xl font-black mt-4 mb-6 leading-tight">
+                Luxury
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300">
+                  Redefined
+                </span>
+              </h1>
+            </div>
+
+            {/* Feature Showcase */}
+            <div className="relative">
+              <div 
+                className="absolute inset-0 rounded-3xl blur-3xl transition-all duration-700"
+                style={{ 
+                  background: `linear-gradient(135deg, ${currentSpec.accent}40, transparent)`,
+                  transform: `scale(${selectedSpec === currentSpec.id ? 1.1 : 0.9})`
+                }}
+              ></div>
+              
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-12 border border-white/10">
+                <div className="flex items-center mb-8">
+                  <div 
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mr-6 transition-all duration-500"
+                    style={{ backgroundColor: currentSpec.accent }}
+                  >
+                    <currentSpec.icon className="w-10 h-10 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {currentSpec.title}
+                    </h3>
+                    <div className="flex items-baseline">
+                      <span className="text-5xl font-black text-white mr-3">
+                        {currentSpec.value}
+                      </span>
+                      <span 
+                        className="text-xl font-semibold"
+                        style={{ color: currentSpec.accent }}
+                      >
+                        {currentSpec.unit}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  {currentSpec.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Specs Navigator */}
+          <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
+            <div className="space-y-4">
+              {specifications1.map((spec, index) => {
+                const IconComponent = spec.icon;
+                const isActive = selectedSpec === index;
+                
+                return (
+                  <div
+                    key={spec.id}
+                    className={`group cursor-pointer transform transition-all duration-500 ${
+                      isActive ? 'scale-105' : 'hover:scale-102'
+                    }`}
+                    onClick={() => setSelectedSpec(index)}
+                  >
+                    <div className={`relative p-6 rounded-2xl border transition-all duration-300 ${
+                      isActive 
+                        ? 'bg-white/10 border-white/30 shadow-2xl' 
+                        : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+                    }`}>
+                      {/* Active Indicator */}
+                      {isActive && (
+                        <div 
+                          className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full transition-all duration-300"
+                          style={{ backgroundColor: spec.accent }}
+                        ></div>
+                      )}
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <div 
+                            className={`w-12 h-12 rounded-xl flex items-center justify-center mr-4 transition-all duration-300 ${
+                              isActive ? 'scale-110 rotate-12' : 'group-hover:scale-105'
+                            }`}
+                            style={{ 
+                              backgroundColor: isActive ? spec.accent : `${spec.accent}40`,
+                              boxShadow: isActive ? `0 10px 30px ${spec.accent}30` : 'none'
+                            }}
+                          >
+                            <IconComponent className={`w-6 h-6 transition-colors duration-300 ${
+                              isActive ? 'text-white' : 'text-gray-300'
+                            }`} />
+                          </div>
+                          <div>
+                            <h4 className={`font-semibold transition-colors duration-300 ${
+                              isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                            }`}>
+                              {spec.title}
+                            </h4>
+                            <div className="flex items-baseline">
+                              <span className={`font-bold mr-1 transition-all duration-300 ${
+                                isActive ? 'text-2xl text-white' : 'text-lg text-gray-400 group-hover:text-white'
+                              }`}>
+                                {spec.value}
+                              </span>
+                              <span 
+                                className={`text-sm font-medium transition-colors duration-300 ${
+                                  isActive ? 'opacity-100' : 'opacity-70'
+                                }`}
+                                style={{ color: spec.accent }}
+                              >
+                                {spec.unit}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                          isActive 
+                            ? 'border-white bg-white' 
+                            : 'border-gray-600 group-hover:border-gray-400'
+                        }`}>
+                          <div 
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                              isActive ? 'scale-100' : 'scale-0'
+                            }`}
+                            style={{ backgroundColor: spec.accent }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Progress Indicator */}
+            <div className="mt-8 flex space-x-2">
+              {specifications1.map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-1 rounded-full transition-all duration-300 ${
+                    selectedSpec === index ? 'w-12 bg-white' : 'w-4 bg-gray-600'
+                  }`}
+                ></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
      {/* Location Advantages */}
-<section id="location" className={`py-20 bg-white transition-all duration-1000 ${isVisible.location ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+<section id="location" className={`py-10 bg-white transition-all duration-1000 ${isVisible.location ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+   
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     {/* Heading */}
     <div className="text-center mb-16">
@@ -585,39 +768,53 @@ const PawnaLakeVillas = () => {
     </div>
 
     {/* Advantages Grid */}
-    <div className="grid lg:grid-cols-2 gap-12 items-center">
-      <div className="space-y-6">
-        {locationAdvantages.map((advantage, index) => (
-          <div 
-            key={index}
-            className="flex items-start p-4 bg-gradient-to-r from-[#b8cce0] to-[#6392bf] rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <div className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0">
-              {index + 1}
-            </div>
-            <p className="text-[#00274d] font-medium">{advantage}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Image Block */}
-      <div className="relative">
-        <div className="bg-gradient-to-br from-[#0a4384] to-[#6392bf] rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300">
-          <img 
-            src={dam}
-            alt="Pawna Lake Location"
-            className="w-full h-80 object-cover rounded-2xl"
-          />
-        </div>
-        <div className="absolute -top-4 -left-4 bg-white p-4 rounded-xl shadow-xl transform hover:scale-110 transition-all duration-300">
-          <div className="text-center">
-            <div className="text-sm font-medium text-[#00274d]/80">Distance to Dam</div>
-            <div className="text-2xl font-bold text-[#0a4384]">500m</div>
-          </div>
-        </div>
+   <div className="grid lg:grid-cols-2 gap-12 items-center">
+  {/* Image with badge - Slide from Left */}
+  <motion.div
+    className="relative"
+    initial={{ opacity: 0, x: -100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    <div className="bg-gradient-to-br from-[#0a4384] to-[#6392bf] rounded-2xl p-1 transform hover:rotate-1 transition-all duration-300">
+      <img 
+        src={dam}
+        alt="Pawna Lake Location"
+        className="w-full h-80 object-cover rounded-2xl"
+      />
+    </div>
+    <div className="absolute -top-4 -left-4 bg-white p-4 rounded-xl shadow-xl transform hover:scale-110 transition-all duration-300">
+      <div className="text-center">
+        <div className="text-sm font-medium text-[#00274d]/80">Distance to Dam</div>
+        <div className="text-2xl font-bold text-[#0a4384]">500m</div>
       </div>
     </div>
+  </motion.div>
+
+  {/* Location Advantages - Slide from Right */}
+  <motion.div
+    className="space-y-6"
+    initial={{ opacity: 0, x: 100 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    viewport={{ once: true }}
+  >
+    {locationAdvantages.map((advantage, index) => (
+      <div 
+        key={index}
+        className="flex items-start p-4 bg-gradient-to-r from-[#b8cce0] to-[#6392bf] rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+        style={{ animationDelay: `${index * 0.1}s` }}
+      >
+        <div className="bg-gradient-to-r from-[#0a4384] to-[#6392bf] text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 flex-shrink-0">
+          {index + 1}
+        </div>
+        <p className="text-[#00274d] font-medium">{advantage}</p>
+      </div>
+    ))}
+  </motion.div>
+</div>
+
 
     {/* CTA Button */}
     <div className="mt-16 text-center">
