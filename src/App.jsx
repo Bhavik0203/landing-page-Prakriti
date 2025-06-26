@@ -7,8 +7,7 @@ function App() {
 
   return (
     <div>
-     <PrakritiLanding/>
-     
+     <PrakritiLanding/> 
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users, Star, ChevronDown, Play, CheckCircle, ArrowRight, Instagram, Facebook, Twitter, MapPin, TrendingUp,  Leaf, Award, Users } from 'lucide-react';
+import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users, Star, ChevronDown, Play, CheckCircle, ArrowRight, Instagram, Facebook, Twitter, TrendingUp, Leaf, Award } from 'lucide-react';
+import PricingSection from './pricingsection';
+import AmenitiesSection from './amenitiessection';
 
 const PrakritiLanding = () => {
 
@@ -309,7 +311,7 @@ const [activeFeature, setActiveFeature] = useState(0);
       </div>
     </section>
       {/* Pricing Section */}
-      <section className="py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+      {/* <section className="py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">🔥 Pre-Launch Pricing 🔥</h2>
           <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
@@ -349,17 +351,14 @@ const [activeFeature, setActiveFeature] = useState(0);
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <PricingSection/>
 
       {/* Amenities Section */}
-      <section id="amenities" className={`py-20 ${isVisible.amenities ? 'animate-fade-in-up' : 'opacity-0'}`}>
+
+      {/* <section id="amenities" className={`py-20 ${isVisible.amenities ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-              Premium Amenities ✨
-            </h2>
-            <p className="text-xl text-gray-600">Ready infrastructure & amenities for your comfort</p>
-          </div>
+          
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {amenities.map((amenity, index) => (
@@ -395,8 +394,8 @@ const [activeFeature, setActiveFeature] = useState(0);
             </div>
           </div>
         </div>
-      </section>
-
+      </section> */}
+            <AmenitiesSection/>
       {/* Gallery Section */}
       <section id="gallery" className={`py-20 bg-gray-50 ${isVisible.gallery ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
