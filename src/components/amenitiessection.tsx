@@ -37,7 +37,7 @@ export default function AmenitiesSection() {
   ];
 
   return (
-    <div className="bg-white min-h-screen overflow-hidden">
+    <div className="bg-white  overflow-hidden">
       {/* Animated Background */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-200/30 to-purple-200/30 rounded-full animate-pulse blur-3xl"></div>
@@ -60,7 +60,7 @@ export default function AmenitiesSection() {
       </div>
 
       <div className="relative z-10 px-6 py-20">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Animated Header */}
           <div className="text-center mb-20">
             <div className="group inline-flex items-center space-x-3 bg-gradient-to-r from-gray-900 to-gray-700 text-white px-8 py-4 rounded-full text-sm font-medium mb-8 hover:from-blue-600 hover:to-purple-600 transition-all duration-500 cursor-pointer hover:scale-105 hover:shadow-2xl">

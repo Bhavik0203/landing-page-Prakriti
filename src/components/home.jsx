@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users, Star, ChevronDown, Play, CheckCircle, ArrowRight, Instagram, Facebook, Twitter, TrendingUp, Leaf, Award } from 'lucide-react';
 import PricingSection from './pricingsection';
 import AmenitiesSection from './amenitiessection';
+import AnimatedGallery from './animatedgallery';
+import EnhancedLocation from './location';
+import AnimatedFAQ from './faq';
+import ContactSection from './contactsection';
 
 const PrakritiLanding = () => {
 
@@ -202,7 +206,7 @@ const [activeFeature, setActiveFeature] = useState(0);
           </p>
         </div>
 
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
@@ -397,7 +401,7 @@ const [activeFeature, setActiveFeature] = useState(0);
       </section> */}
             <AmenitiesSection/>
       {/* Gallery Section */}
-      <section id="gallery" className={`py-20 bg-gray-50 ${isVisible.gallery ? 'animate-fade-in-up' : 'opacity-0'}`}>
+      {/* <section id="gallery" className={`py-20 bg-gray-50 ${isVisible.gallery ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
@@ -423,10 +427,11 @@ const [activeFeature, setActiveFeature] = useState(0);
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <AnimatedGallery/>
 
       {/* Location Section */}
-      <section id="location" className={`py-20 ${isVisible.location ? 'animate-fade-in-up' : 'opacity-0'}`}>
+      {/* <section id="location" className={`py-20 ${isVisible.location ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
@@ -497,10 +502,11 @@ const [activeFeature, setActiveFeature] = useState(0);
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <EnhancedLocation/>
 
       {/* FAQ Section */}
-      <section id="faq" className={`py-20 bg-gray-50 ${isVisible.faq ? 'animate-fade-in-up' : 'opacity-0'}`}>
+      {/* <section id="faq" className={`py-20 bg-gray-50 ${isVisible.faq ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
@@ -518,10 +524,10 @@ const [activeFeature, setActiveFeature] = useState(0);
             ))}
           </div>
         </div>
-      </section>
-
+      </section> */}
+<AnimatedFAQ/>
       {/* Contact Section */}
-      <section id="contact" className={`py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white ${isVisible.contact ? 'animate-fade-in-up' : 'opacity-0'}`}>
+      {/* <section id="contact" className={`py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white ${isVisible.contact ? 'animate-fade-in-up' : 'opacity-0'}`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -606,8 +612,8 @@ const [activeFeature, setActiveFeature] = useState(0);
             </div>
           </div>
         </div>
-      </section>
-
+      </section> */}
+      <ContactSection/>
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-800">
         <div className="container mx-auto px-4 text-center">
@@ -702,11 +708,17 @@ const [activeFeature, setActiveFeature] = useState(0);
       </footer>
 
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <a href="tel:+918007337788" className="bg-green-600 text-white p-4 rounded-full shadow-2xl hover:bg-green-700 transform hover:scale-110 transition-all duration-300 animate-pulse">
-          <Phone className="w-6 h-6" />
-        </a>
-      </div>
+    
+       <div className="fixed bottom-6 right-6 z-50">
+  <a
+    href="tel:8378966777"
+    className="flex items-center justify-center bg-green-600  text-white w-14 h-14 rounded-full shadow-lg hover:shadow-[#0a4384]/40 transform hover:scale-110 transition duration-300 animate-pulse"
+    aria-label="Call Now"
+  >
+    <Phone size={24} />
+  </a>
+</div>
+
 
       {/* Custom CSS for animations */}
       <style jsx>{`
