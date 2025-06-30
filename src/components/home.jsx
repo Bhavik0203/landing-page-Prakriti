@@ -289,47 +289,57 @@ const PrakritiLanding = () => {
               </div>
 
               {/* Specifications Section */}
-              <div className="space-y-8">
-                <div className="relative">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-100 to-teal-100 opacity-50 blur-xl"></div>
-                  <div className="relative bg-gradient-to-br from-green-50 to-teal-50 rounded-3xl p-8 border border-green-200 shadow-lg">
-                    <div className="text-center mb-8">
-                      <h3 className="text-3xl font-bold text-gray-800 mb-2">Project Specifications</h3>
-                      <div className="w-24 h-1 mx-auto rounded-full bg-green-500"></div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4">
-                      {specs.map((spec, index) => (
-                        <div
-                          key={index}
-                          className="group bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-green-200 hover:border-green-300 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg"
-                        >
-                          <div className="flex items-center space-x-3 mb-3">
-                            <div className="p-2 rounded-lg text-white bg-teal-600">
-                              {spec.icon}
-                            </div>
-                            <div className="font-semibold text-gray-600 text-sm leading-tight">
-                              {spec.label}
-                            </div>
-                          </div>
-                          <div className="text-2xl font-bold text-green-600">
-                            {spec.value}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+            <div className="space-y-8 px-4 md:px-0">
+  {/* Project Specifications Section */}
+  <div className="relative">
+    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-100 to-teal-100 opacity-50 blur-xl"></div>
+    <div className="relative bg-gradient-to-br from-green-50 to-teal-50 rounded-3xl p-6 md:p-8 border border-green-200 shadow-lg">
+      
+      <div className="text-center mb-6 md:mb-8">
+        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Project Specifications</h3>
+        <div className="w-20 md:w-24 h-1 mx-auto rounded-full bg-green-500"></div>
+      </div>
 
-              
-                <div className="text-center p-8 rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 to-teal-50">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-4">Ready to Invest in Your Future?</h4>
-                  <p className="text-gray-600 mb-6">Join the smart investors who've already discovered Prakriti</p>
-                  <a href="#contact" className="px-8 py-4 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl bg-teal-600 hover:bg-teal-700">
-                    Explore Plots Now
-                  </a>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {specs.map((spec, index) => (
+          <div
+            key={index}
+            className="group bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-2xl border border-green-200 hover:border-green-300 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg"
+          >
+            <div className="flex items-center space-x-3 mb-3">
+              <div className="p-2 rounded-lg text-white bg-teal-600">
+                {spec.icon}
               </div>
+              <div className="font-semibold text-gray-600 text-sm leading-tight">
+                {spec.label}
+              </div>
+            </div>
+            <div className="text-xl md:text-2xl font-bold text-green-600">
+              {spec.value}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* CTA Section */}
+  <div className="text-center p-6 md:p-8 rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 to-teal-50">
+    <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
+      Ready to Invest in Your Future?
+    </h4>
+    <p className="text-gray-600 mb-6 text-sm md:text-base">
+      Join the smart investors who've already discovered Prakriti
+    </p>
+    <a
+      href="#contact"
+      className="inline-block px-6 md:px-8 py-3 md:py-4 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl bg-teal-600 hover:bg-teal-700"
+    >
+      Explore Plots Now
+    </a>
+  </div>
+</div>
+
             </div>
           </div>
         </div>
