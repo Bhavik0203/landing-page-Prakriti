@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, MapPin, Users, Send, Star, Zap, Clock } from 'lucide-react';
+import { link } from 'framer-motion/client';
 
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState({ contact: false });
@@ -44,6 +45,7 @@ const ContactSection = () => {
       icon: MapPin,
       title: "Project Location",
       content: "Near Takve, Pune",
+      link: "https://maps.app.goo.gl/dVpH5s47ry8QjMe88?g_st=iw",
       accent: "from-purple-400 to-pink-400"
     },
     {
@@ -64,7 +66,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="relative  bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
+    <section className="relative bg-gray-900 overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
@@ -91,42 +93,91 @@ const ContactSection = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Info Cards */}
             <div className="lg:col-span-1 space-y-6">
-              {contactInfo.map((info, index) => (
-                <div
-                  key={index}
-                  className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${hoveredCard === index ? 'shadow-2xl shadow-cyan-500/20' : ''}`}
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={`relative p-3 rounded-xl bg-gradient-to-r ${info.accent} group-hover:scale-110 transition-transform duration-300`}>
-                      <info.icon className="w-6 h-6 text-white" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-                        {info.title}
-                      </h3>
-                      {info.link ? (
-                        <a 
-                          href={info.link} 
-                          className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
-                        >
-                          {info.content}
-                        </a>
-                      ) : (
-                        <div className="text-gray-300 group-hover:text-white transition-colors">
-                          <div className="font-medium">{info.content}</div>
-                          {info.subtitle && (
-                            <div className="text-sm text-gray-400 mt-1">{info.subtitle}</div>
-                          )}
-                        </div>
-                      )}
+              {/* Call Now Card */}
+               <div
+    className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${
+      hoveredCard === 1 ? 'shadow-2xl shadow-cyan-500/20' : ''
+    }`}
+    onMouseEnter={() => setHoveredCard(1)}
+    onMouseLeave={() => setHoveredCard(null)}
+  >
+              <a
+  href="tel:+918007337788"
+  className="flex items-start gap-4 group"
+  style={{ cursor: 'pointer' }}
+>
+  <div className="relative p-3 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 group-hover:scale-110 transition-transform duration-300">
+    <Phone className="w-6 h-6 text-white" />
+    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  </div>
+  <div className="flex-1">
+    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+      Call Now
+    </h3>
+    <span className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+      +91 800 733 7788
+    </span>
+  </div>
+</a>
+</div>
+
+              {/* Project Location Card */}
+            <a
+  href="https://maps.app.goo.gl/dVpH5s47ry8QjMe88?g_st=iw"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="block"
+>
+  <div
+    className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${
+      hoveredCard === 1 ? 'shadow-2xl shadow-cyan-500/20' : ''
+    }`}
+    onMouseEnter={() => setHoveredCard(1)}
+    onMouseLeave={() => setHoveredCard(null)}
+  >
+    <div className="flex items-start gap-4">
+      <div className="relative p-3 rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 group-hover:scale-110 transition-transform duration-300">
+        <MapPin className="w-6 h-6 text-white" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </div>
+      <div className="flex-1">
+        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+          Project Location
+        </h3>
+        <p className="text-xl font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors">
+          Near Takve, Pune
+        </p>
+      </div>
+    </div>
+    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+  </div>
+</a>
+
+
+
+              {/* Builder Card */}
+              <div
+                className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${hoveredCard === 2 ? 'shadow-2xl shadow-cyan-500/20' : ''}`}
+                onMouseEnter={() => setHoveredCard(2)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="relative p-3 rounded-xl bg-gradient-to-r from-orange-400 to-red-400 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="w-6 h-6 text-white" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                      Builder
+                    </h3>
+                    <div className="text-gray-300 group-hover:text-white transition-colors">
+                      <div className="font-medium">Chirag Khandage</div>
+                      <div className="text-sm text-gray-400 mt-1">Strategic Partner: Rising Spaces</div>
                     </div>
                   </div>
-                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${info.accent} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
                 </div>
-              ))}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-400 to-red-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+              </div>
 
               {/* Special Offer Banner */}
               <div className="relative p-6 rounded-2xl bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-md border border-yellow-500/30 overflow-hidden">
@@ -168,16 +219,28 @@ const ContactSection = () => {
                           className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
                         />
                       </div>
-                      <div className="group">
+                        <div className="group">
                         <input
                           type="tel"
                           name="phone"
                           placeholder="Phone Number"
                           value={formData.phone}
-                          onChange={handleInputChange}
+                          onChange={(e) => {
+                          // Only allow numbers and max 10 digits
+                          const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                          setFormData({ ...formData, phone: value });
+                          }}
+                          pattern="\d{10}"
+                          maxLength={10}
+                          required
+                          inputMode="numeric"
+                          autoComplete="tel"
                           className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
                         />
-                      </div>
+                        {formData.phone && formData.phone.length !== 10 && (
+                          <p className="text-red-400 text-xs mt-1">Enter a valid 10-digit phone number</p>
+                        )}
+                        </div>
                     </div>
 
                     <div className="group">

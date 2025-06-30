@@ -71,12 +71,11 @@ const EnhancedLocation = () => {
         <div className="container mx-auto px-4">
           {/* Animated Header */}
           <div className="text-center mb-20 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-blue-400/20 blur-3xl -z-10 rounded-full"></div>
-            <h2 className={`text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-green-600 via-emerald-500 to-blue-600 bg-clip-text text-transparent transition-all duration-1000 ${
-              isVisible.location ? 'scale-100 rotate-0' : 'scale-75 rotate-12'
-            }`}>
-              Prime Location 📍
-            </h2>
+            <div className="absolute inset-0 blur-3xl -z-10 rounded-full"></div>
+           
+            <h2 className="text-5xl md:text-5xl font-black text-gray/900 mb-4 leading-tight drop-shadow-2xl">
+ Prime <span className=" text-green-400"> Location</span>
+          </h2>
             <div className={`h-1 w-32 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-6 rounded-full transition-all duration-1000 ${
               isVisible.location ? 'scale-100' : 'scale-0'
             }`}></div>
